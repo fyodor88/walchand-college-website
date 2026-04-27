@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI & Machine Learning — WCE Sangli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --maroon:      #7B1818;
+      --maroon-dark:  #5A1010;
+      --maroon-light: #A52A2A;
+      --gold:        #C9A84C;
+      --gold-light:  #E8D48B;
+      --cream:       #FDF8F0;
+      --dark:        #1a0a0a;
+      --text:        #2c1810;
+      --muted:       #7a6b63;
+      --border:      #e8ddd5;
+      --bg:          #FAF5F0;
+      --card:        #ffffff;
+      --radius:      12px;
+      --shadow-sm: 0 1px 3px rgba(123,24,24,.06);
+      --shadow-md: 0 4px 16px rgba(123,24,24,.1);
+      --shadow-lg: 0 12px 40px rgba(123,24,24,.14);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--maroon-dark);
+      padding: 0 24px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+    .top-bar a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: all .2s;
+      font-weight: 500;
+    }
+    .top-bar a:hover { color:#fff; background:rgba(255,255,255,.1); }
+    .top-bar-left { display:flex; align-items:center; gap:4px; }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold) !important;
+      font-weight: 700 !important;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--card);
+      border-bottom: 3px solid var(--maroon);
+      box-shadow: var(--shadow-md);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .nav-logo img { height: 42px; }
+    .nav-logo-text .name { font-size:15px; font-weight:800; color:var(--maroon); display:block; }
+    .nav-logo-text .sub { font-size:11px; color:var(--muted); display:block; }
+    .nav-sep { flex:1; }
+    .dept-badge {
+      background: linear-gradient(135deg,var(--maroon),var(--maroon-light));
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    /* ── HERO ── */
+    .aiml-hero {
+      background: linear-gradient(135deg, var(--maroon-dark) 0%, var(--maroon) 60%, #8B1C1C 100%);
+      padding: 48px 32px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 32px;
+      max-width: 1100px;
+      margin: 24px auto;
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .aiml-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 220px; height: 220px;
+      background: rgba(201,168,76,.1);
+      border-radius: 50%;
+    }
+    .aiml-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 20%;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,.04);
+      border-radius: 50%;
+    }
+    .hero-left { flex: 1; min-width: 260px; position:relative; z-index:2; }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(201,168,76,.2);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .hero-title span { color: var(--gold); }
+    .hero-sub {
+      color: rgba(255,255,255,.75);
+      font-size: 13px;
+      margin-bottom: 20px;
+      max-width: 480px;
+    }
+    .hero-pills { display:flex; flex-wrap:wrap; gap:8px; }
+    .hero-pill {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.9);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+    .hero-right {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-stat-box {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px;
+      padding: 14px 20px;
+      text-align: center;
+      min-width: 90px;
+      backdrop-filter: blur(6px);
+    }
+    .hero-stat-box .num { font-size: 22px; font-weight: 900; color: var(--gold); display:block; }
+    .hero-stat-box .lbl { font-size: 10px; color: rgba(255,255,255,.65); font-weight: 600; display:block; margin-top:2px; }
+
+    /* ── PAGE WRAPPER ── */
+    .page { max-width: 1100px; margin: 0 auto; padding: 0 24px 48px; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      margin-top: 36px;
+    }
+    .section-icon { font-size: 22px; }
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--maroon);
+    }
+    .header-line { flex:1; height:2px; background:linear-gradient(90deg,var(--maroon),transparent); border-radius:2px; }
+
+    /* ── HOD CARD ── */
+    .hod-card {
+      display: flex;
+      gap: 24px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 28px;
+      align-items: flex-start;
+      border-left: 5px solid var(--maroon);
+      flex-wrap: wrap;
+    }
+    .hod-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--maroon), var(--maroon-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-md);
+      border: 4px solid var(--gold);
+    }
+    .hod-info { flex:1; min-width: 220px; }
+    .hod-tag {
+      display: inline-block;
+      background: var(--maroon);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .hod-name { font-size: 20px; font-weight: 800; color: var(--maroon); margin-bottom: 4px; }
+    .hod-degree { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+    .hod-chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 14px; }
+    .hod-chip {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+    .hod-quote {
+      font-style: italic;
+      color: var(--muted);
+      font-size: 12px;
+      border-left: 3px solid var(--gold);
+      padding-left: 12px;
+      line-height: 1.6;
+    }
+
+    /* ── INFO GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+    }
+    .info-tile {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-sm);
+      border-top: 3px solid var(--maroon);
+      text-align: center;
+    }
+    .info-tile .icon { font-size: 24px; margin-bottom: 8px; }
+    .info-tile .val { font-size: 20px; font-weight: 800; color: var(--maroon); display:block; }
+    .info-tile .lbl { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+    /* ── CURRICULUM ── */
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .sem-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sem-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--maroon);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .sem-subject {
+      font-size: 12px;
+      padding: 5px 0;
+      border-bottom: 1px dashed var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sem-subject:last-child { border-bottom: none; }
+    .sem-subject::before { content:'◦'; color:var(--gold); font-size:10px; }
+
+    /* ── FACULTY GRID ── */
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .faculty-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .faculty-card:hover { transform:translateY(-4px); box-shadow: var(--shadow-md); }
+    .faculty-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--maroon), var(--maroon-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin: 0 auto 10px;
+      border: 3px solid var(--gold);
+    }
+    .faculty-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .faculty-role { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .faculty-spec {
+      display: inline-block;
+      margin-top: 8px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      color: var(--maroon);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 8px;
+    }
+
+    /* ── LABS ── */
+    .labs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .lab-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--gold);
+    }
+    .lab-icon { font-size: 26px; margin-bottom: 8px; }
+    .lab-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .lab-desc { font-size: 11px; color: var(--muted); }
+
+    /* ── ACHIEVEMENTS ── */
+    .achieve-list { display:flex; flex-direction:column; gap:10px; }
+    .achieve-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-left: 4px solid var(--maroon);
+    }
+    .achieve-icon { font-size: 22px; flex-shrink:0; }
+    .achieve-text { font-size: 13px; color: var(--text); font-weight: 500; }
+    .achieve-year {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--maroon);
+      background: var(--cream);
+      padding: 3px 8px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--maroon-dark);
+      color: rgba(255,255,255,.75);
+      text-align: center;
+      padding: 20px 24px;
+      font-size: 12px;
+      margin-top: 32px;
+    }
+    .footer a { color: var(--gold); text-decoration: none; }
+    .footer strong { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .aiml-hero { padding: 28px 20px; }
+      .hod-card { padding: 20px; }
+      .page { padding: 0 16px 40px; }
+    }
+  </style>
+  <style>
+.aiml-hero {
+  background:
+    linear-gradient(rgba(123,24,24,0.85), rgba(123,24,24,0.85)),
+    url("dep.jpeg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 48px 32px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 24px auto;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(123,24,24,.14);
+  position: relative;
+  overflow: hidden;
+}
+
+/* dark overlay for better text visibility */
+.aiml-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 1;
+}
+
+.hero-left,
+.hero-right {
+  position: relative;
+  z-index: 2;
+}
+</style>
+<style>
+.hod-card {
+  display: flex;
+  gap: 30px;
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  padding: 40px;              /* ⬅️ BIGGER padding */
+  align-items: flex-start;
+  border-left: 6px solid var(--maroon);
+  flex-wrap: wrap;
+}
+
+/* 🔥 BIGGER AVATAR */
+.hod-avatar {
+  width: 160px;               /* was ~110px */
+  height: 160px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--maroon), var(--maroon-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-lg);
+  border: 5px solid var(--gold);
+}
+
+/* IMAGE INSIDE */
+.hod-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* TEXT AREA BIGGER */
+.hod-name {
+  font-size: 26px;   /* bigger name */
+  font-weight: 900;
+  color: var(--maroon);
+}
+
+.hod-degree {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.hod-quote {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+/* CHIP STYLE BIGGER */
+.hod-chip {
+  font-size: 12px;
+  padding: 5px 12px;
+}
+
+/* RIGHT SIDE BOX BIGGER */
+.hod-card > div:last-child {
+  min-width: 220px;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+
+  <!-- LEFT SIDE -->
+  <div class="top-bar-left">
+    <a href="index.html" class="back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="m15 18-6-6 6-6"/>
+      </svg>
+      Back to WCE Home
+    </a>
+  </div>
+
+  <!-- CENTER MENU -->
+  <div class="top-bar-menu">
+
+    <a href="#overview">Overview</a>
+    <a href="#curriculum">B.Tech Curriculum</a>
+    <a href="#planning">Academic Planning</a>
+    <a href="#resources">Resources</a>
+    <a href="#faculty">Faculty</a>
+    <a href="#students">Students Development</a>
+    <a href="#achievements">Achievements</a>
+
+  </div>
+
+  <!-- RIGHT SIDE TEXT -->
+  <div class="top-bar-right">
+    Department of AI &amp; Machine Learning — WCE Sangli
+  </div>
+
+</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="logo.webp" alt="WCE Logo" />
+    <div class="nav-logo-text">
+      <span class="name">Walchand College of Engineering</span>
+      <span class="sub">Sangli · Est. 1947 · NAAC A+</span>
+    </div>
+  </a>
+  <div class="nav-sep"></div>
+  <div class="dept-badge">🤖 AI &amp; ML Department</div>
+</nav>
+
+<!-- HERO -->
+<div style="padding: 0 24px; max-width:1148px; margin:0 auto;">
+<div class="aiml-hero">
+  <div class="hero-left">
+    <div class="hero-tag">🤖 Department of</div>
+    <h1 class="hero-title">Artificial Intelligence<br>&amp; <span>Machine Learning</span></h1>
+    <p class="hero-sub">Shaping the future through intelligent systems, deep learning, and data-driven innovation. One of WCE's fastest-growing departments.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">B.Tech Program</span>
+      <span class="hero-pill">NBA Accredited</span>
+      <span class="hero-pill">Est. 2024</span>
+      <span class="hero-pill">60 Seats</span>
+    </div>
+  </div>
+</div>
+</div>
+  <!-- </div>
+  <div class="hero-right">
+    <div class="hero-stat-box"><span class="num">60</span><span class="lbl">Seats</span></div>
+    <div class="hero-stat-box"><span class="num">20+</span><span class="lbl">Faculty</span></div>
+    <div class="hero-stat-box"><span class="num">₹16 LPA</span><span class="lbl">Avg Package</span></div>
+    <div class="hero-stat-box"><span class="num">98%</span><span class="lbl">Placement</span></div>
+  </div> -->
+</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page">
+
+  <!-- ABOUT DEPT -->
+  <div class="section-header">
+    <div class="section-icon">🏛️</div>
+    <h2>About the Department</h2>
+    <div class="header-line"></div>
+  </div>
+  <div style="background:var(--card);border-radius:var(--radius);padding:24px 28px;box-shadow:var(--shadow-sm);margin-bottom:8px;line-height:1.8;font-size:13px;">
+    <p style="margin-bottom:12px;">The Department of <strong>Artificial Intelligence &amp; Machine Learning (AIML)</strong> at Walchand College of Engineering, Sangli was established in <strong>2020</strong> to meet the growing demand for AI professionals in India and globally. The department offers a 4-year <strong>B.Tech program</strong> with a total intake of <strong>60 students per year</strong>.</p>
+    <p>Students are trained in cutting-edge areas including deep learning, natural language processing, computer vision, reinforcement learning, and data engineering. The curriculum is continuously updated in collaboration with industry partners to ensure graduates are industry-ready from day one.The Department of Artificial Intelligence and Machine Learning at Walchand College of Engineering (WCE), Sangli, stands as a beacon of excellence, shaping the future of technology and innovation since its inception. Established in 2024, the department has consistently upheld its commitment to fostering technical expertise, research acumen, and ethical leadership in its students.
+
+The department has cultivated a reputation for academic rigor, blending foundational knowledge with cutting-edge technological advancements. With a carefully crafted curriculum aligned to industry needs and global standards, it prepares students to thrive in a rapidly evolving tech landscape. The emphasis on interdisciplinary learning, problem-solving, and real-world applications has made its graduates highly sought-after by top-tier organizations.
+
+Faculty and students alike have contributed to advancements in technology through publications in reputed journals, participation in conferences, and collaborative projects with industry leaders.
+
+The department maintains strong ties with the technology industry, enabling students to bridge the gap between academia and professional practice. Partnerships with renowned companies for internships, placements, and collaborative projects ensure that students gain hands-on experience and exposure to real-world challenges.
+
+The department boasts state-of-the-art infrastructure, including modern laboratories, high-performance computing facilities, and access to the latest software tools. These resources empower students to experiment, innovate, and excel in their endeavours. Additionally, a robust library and online resources provide the intellectual backbone for comprehensive learning.
+
+At the heart of the department is its student-centric approach. Faculty members serve as mentors, guiding students not just in academics but also in personal and professional development. The department actively promotes extracurricular activities, technical clubs, and community engagement, fostering a holistic growth environment.
+
+</p>
+  </div>
+
+  <!-- HOD SECTION -->
+  <div class="section-header">
+    <div class="section-icon">👨‍🏫</div>
+    <h2>Head of Department</h2>
+    <div class="header-line"></div>
+  </div>
+
+  <div class="hod-card">
+
+    <!-- CHANGED ONLY THIS PART -->
+    <div class="hod-avatar">
+      <img src="hod.jpg" alt="HOD Image" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+    </div>
+
+    <div class="hod-info">
+      <div class="hod-tag">HOD — AIML</div>
+      <div class="hod-name">Dr. Rajesh S. Patil</div>
+      <div class="hod-degree">Ph.D. (IIT Bombay) · M.Tech (VJTI Mumbai) · B.E. (WCE Sangli)</div>
+
+      <div class="hod-chips">
+        <span class="hod-chip">Machine Learning</span>
+        <span class="hod-chip">Computer Vision</span>
+        <span class="hod-chip">Deep Learning</span>
+        <span class="hod-chip">20+ Years Experience</span>
+        <span class="hod-chip">15 Publications</span>
+      </div>
+
+      <div class="hod-quote">
+        "Our mission is to nurture engineers who don't just use AI — they innovate with it. We believe in bridging theory with real-world impact, producing graduates who are both technically strong and ethically grounded."
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:180px;">
+      <div style="background:var(--cream);border-radius:10px;padding:12px 16px;border:1px solid var(--border);">
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:4px;">CONTACT</div>
+        <div style="font-size:12px;font-weight:600;">hod.aiml@walchandsangli.ac.in</div>
+        <div style="font-size:12px;color:var(--muted);">+91 233 2300383 Ext. 210</div>
+      </div>
+
+      <div style="background:var(--cream);border-radius:10px;padding:12px 16px;border:1px solid var(--border);">
+        <div style="font-size:10px;color:var(--muted);font-weight:700;margin-bottom:4px;">RESEARCH AREAS</div>
+        <div style="font-size:11px;">Medical Imaging AI · Edge Computing · Federated Learning</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- KEY STATS
+  <div class="section-header">
+    <div class="section-icon">📊</div>
+    <h2>Department at a Glance</h2>
+    <div class="header-line"></div>
+  </div>
+  <div class="info-grid">
+    <div class="info-tile"><div class="icon">🎓</div><span class="val">60</span><span class="lbl">Annual Intake</span></div>
+    <div class="info-tile"><div class="icon">👨‍🏫</div><span class="val">20+</span><span class="lbl">Faculty Members</span></div>
+    <div class="info-tile"><div class="icon">💼</div><span class="val">₹16 LPA</span><span class="lbl">Avg CTC</span></div>
+    <div class="info-tile"><div class="icon">🏆</div><span class="val">₹42 LPA</span><span class="lbl">Highest CTC</span></div>
+    <div class="info-tile"><div class="icon">🔬</div><span class="val">5</span><span class="lbl">Research Labs</span></div>
+    <div class="info-tile"><div class="icon">📄</div><span class="val">40+</span><span class="lbl">Publications</span></div>
+  </div> -->
+
+  <!-- CURRICULUM -->
+  <!-- <div class="section-header">
+    <div class="section-icon">📚</div>
+    <h2>Curriculum Overview</h2>
+    <div class="header-line"></div>
+  </div>
+  <div class="curriculum-grid">
+    <div class="sem-card">
+      <div class="sem-title">Year 1 — Foundation</div>
+      <div class="sem-subject">Engineering Mathematics I & II</div>
+      <div class="sem-subject">Programming in Python</div>
+      <div class="sem-subject">Data Structures & Algorithms</div>
+      <div class="sem-subject">Physics & Chemistry</div>
+      <div class="sem-subject">Engineering Graphics</div>
+    </div>
+    <div class="sem-card">
+      <div class="sem-title">Year 2 — Core AI/ML</div>
+      <div class="sem-subject">Machine Learning Fundamentals</div>
+      <div class="sem-subject">Probability & Statistics</div>
+      <div class="sem-subject">Database Management Systems</div>
+      <div class="sem-subject">Linear Algebra for AI</div>
+      <div class="sem-subject">Introduction to Neural Networks</div>
+    </div>
+    <div class="sem-card">
+      <div class="sem-title">Year 3 — Advanced Topics</div>
+      <div class="sem-subject">Deep Learning & CNNs</div>
+      <div class="sem-subject">Natural Language Processing</div>
+      <div class="sem-subject">Computer Vision</div>
+      <div class="sem-subject">Reinforcement Learning</div>
+      <div class="sem-subject">Big Data Analytics</div>
+    </div>
+    <div class="sem-card">
+      <div class="sem-title">Year 4 — Specialization</div>
+      <div class="sem-subject">Generative AI & LLMs</div>
+      <div class="sem-subject">MLOps & Model Deployment</div>
+      <div class="sem-subject">AI Ethics & Governance</div>
+      <div class="sem-subject">Capstone Project</div>
+      <div class="sem-subject">Industry Internship</div>
+    </div>
+  </div>
+
+  FACULTY
+  <div class="section-header">
+    <div class="section-icon">👩‍🏫</div>
+    <h2>Our Faculty</h2>
+    <div class="header-line"></div>
+  </div>
+  <div class="faculty-grid">
+    <div class="faculty-card">
+      <div class="faculty-avatar">👩‍💻</div>
+      <div class="faculty-name">Dr. Priya Kulkarni</div>
+      <div class="faculty-role">Associate Professor</div>
+      <span class="faculty-spec">NLP & Text Mining</span>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar">👨‍🔬</div>
+      <div class="faculty-name">Prof. Anil Deshmukh</div>
+      <div class="faculty-role">Assistant Professor</div>
+      <span class="faculty-spec">Computer Vision</span>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar">👩‍🏫</div>
+      <div class="faculty-name">Dr. Snehal Kore</div>
+      <div class="faculty-role">Associate Professor</div>
+      <span class="faculty-spec">Deep Learning</span>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar">👨‍💼</div>
+      <div class="faculty-name">Prof. Mahesh Jadhav</div>
+      <div class="faculty-role">Assistant Professor</div>
+      <span class="faculty-spec">Reinforcement Learning</span>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar">👩‍🔬</div>
+      <div class="faculty-name">Dr. Manasi Patade</div>
+      <div class="faculty-role">Assistant Professor</div>
+      <span class="faculty-spec">MLOps & Big Data</span>
+    </div>
+    <div class="faculty-card">
+      <div class="faculty-avatar">👨‍🏫</div>
+      <div class="faculty-name">Prof. Suresh Naik</div>
+      <div class="faculty-role">Assistant Professor</div>
+      <span class="faculty-spec">Statistics & Probability</span>
+    </div>
+  </div> -->
+
+  <!-- LABS -->
+  <div class="section-header">
+    <div class="section-icon">🔬</div>
+    <h2>Research Laboratories</h2>
+    <div class="header-line"></div>
+  </div>
+  <div class="labs-grid">
+    <div class="lab-card">
+      <div class="lab-icon">🧠</div>
+      <div class="lab-name">Deep Learning Lab</div>
+      <div class="lab-desc">NVIDIA A100 GPUs, CUDA workstations for training large models and neural network research.</div>
+    </div>
+    <div class="lab-card">
+      <div class="lab-icon">👁️</div>
+      <div class="lab-name">Computer Vision Lab</div>
+      <div class="lab-desc">High-resolution cameras, OpenCV & PyTorch setups for image segmentation and object detection.</div>
+    </div>
+    <div class="lab-card">
+      <div class="lab-icon">💬</div>
+      <div class="lab-name">NLP & Language AI Lab</div>
+      <div class="lab-desc">GPU cluster for transformer models, LLM fine-tuning, and multilingual language processing research.</div>
+    </div>
+    <div class="lab-card">
+      <div class="lab-icon">📊</div>
+      <div class="lab-name">Data Engineering Lab</div>
+      <div class="lab-desc">Apache Spark, Hadoop cluster, Kafka setup for real-time and batch data pipeline development.</div>
+    </div>
+    <div class="lab-card">
+      <div class="lab-icon">🤖</div>
+      <div class="lab-name">AI Robotics Lab</div>
+      <div class="lab-desc">UR5 robot arms, ROS2 environment, reinforcement learning hardware for embodied AI research.</div>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <!-- <div class="section-header">
+    <div class="section-icon">🏆</div>
+    <h2>Achievements & Highlights</h2>
+    <div class="header-line"></div>
+  </div>
+  <div class="achieve-list">
+    <div class="achieve-item">
+      <div class="achieve-icon">🥇</div>
+      <div class="achieve-text">Students won <strong>1st Place</strong> at Smart India Hackathon in AI/Healthcare track</div>
+      <div class="achieve-year">2025</div>
+    </div>
+    <div class="achieve-item">
+      <div class="achieve-icon">📄</div>
+      <div class="achieve-text">40+ research papers published in IEEE, Springer, and Elsevier journals by faculty &amp; students</div>
+      <div class="achieve-year">2024–25</div>
+    </div>
+    <div class="achieve-item">
+      <div class="achieve-icon">💼</div>
+      <div class="achieve-text">Batch of 2024 achieved <strong>₹42 LPA highest package</strong> — placed at leading MNC and startup</div>
+      <div class="achieve-year">2024</div>
+    </div>
+    <div class="achieve-item">
+      <div class="achieve-icon">🤝</div>
+      <div class="achieve-text">MoU signed with <strong>NVIDIA, Persistent Systems, and Infosys</strong> for industry collaboration</div>
+      <div class="achieve-year">2024</div>
+    </div>
+    <div class="achieve-item">
+      <div class="achieve-icon">🔬</div>
+      <div class="achieve-text">Funded research project on <strong>Medical Imaging AI</strong> worth ₹18 Lakhs from DST-SERB</div>
+      <div class="achieve-year">2023</div>
+    </div>
+    <div class="achieve-item">
+      <div class="achieve-icon">🏛️</div>
+      <div class="achieve-text">Department received <strong>NBA Accreditation</strong> within 3 years of establishment</div>
+      <div class="achieve-year">2023</div>
+    </div>
+  </div>
+
+</div>/page -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p><strong>Department of AI &amp; Machine Learning</strong> · Walchand College of Engineering, Sangli — 416415</p>
+  <p style="margin-top:6px;">📧 <a href="mailto:hod.aiml@walchandsangli.ac.in">hod.aiml@walchandsangli.ac.in</a> · 📞 +91 233 2300383 · <a href="index.html">← Back to WCE Home</a></p>
+  <p style="margin-top:8px;font-size:11px;opacity:.6;">© 2026 Walchand College of Engineering. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
